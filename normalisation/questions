@@ -1,0 +1,100 @@
+Question 3: What are the primary keys and foreign keys in a relational database, and how do they establish relationships between tables?
+
+Primary Key:
+    A primary key is a column or set of columns that uniquely identifies each row (record) in a table.
+    It ensures the uniqueness of rows within the table, meaning no two rows can have the same primary key value.
+    Typically, primary keys are implemented using a single column (e.g., an auto-incrementing ID), but they can also be composite keys made up of multiple columns.
+    Primary keys are used to enforce entity integrity and establish relationships between tables.
+    They are defined when creating a table and are usually denoted as such with constraints (e.g., PRIMARY KEY constraint in SQL).
+Foreign Key:
+    A foreign key is a column or set of columns in one table that refers to the primary key in another table.
+    It establishes a relationship between two tables by enforcing referential integrity, ensuring that values in the foreign key column(s) correspond to values in the primary key column of the referenced table.
+    Foreign keys help maintain data consistency and integrity across related tables in a database.
+    Unlike primary keys, which are unique within their own table, foreign keys can contain duplicate values. However, each value in the foreign key column(s) must exist in the referenced primary key column(s) of the related table.
+    Foreign keys are defined as constraints in the table schema, typically using the FOREIGN KEY constraint in SQL.
+Relationship Establishment:
+    To establish a relationship between tables, you typically define a foreign key in the child table that references the primary key of the parent table.
+    This creates a link between the two tables, allowing you to retrieve related data using JOIN operations in queries.
+    For example, if you have a Orders table with a CustomerID foreign key referencing the Customers table's CustomerID primary key, you can retrieve information about orders and their corresponding customers by joining the two tables on the CustomerID columns.
+
+
+
+
+Question 4: Explain the ACID properties in the context of database transactions.
+
+
+The ACID properties are a set of four characteristics that guarantee the reliability and consistency of database transactions. These properties ensure that database transactions are executed in a manner that preserves data integrity even in the presence of errors, failures, or concurrent accesses. Here's what each property entails:
+
+Atomicity: Atomicity ensures that a transaction is treated as a single, indivisible unit of work. Either all the operations within the transaction are successfully completed, or none of them are. If any operation fails within the transaction, the entire transaction is rolled back, and the database is left unchanged. This property ensures that the database remains in a consistent state even in the event of failures.
+
+Consistency: Consistency ensures that a transaction transforms the database from one consistent state to another consistent state. It guarantees that the integrity constraints, business rules, and data validation rules are maintained throughout the transaction. In other words, a transaction brings the database from one valid state to another valid state without violating any rules or constraints.
+
+Isolation: Isolation ensures that the execution of multiple transactions concurrently produces the same result as if the transactions were executed sequentially, one after the other. Each transaction is isolated from other transactions until it completes, preventing interference or interference between transactions. Isolation levels, such as Read Uncommitted, Read Committed, Repeatable Read, and Serializable, define the degree of isolation provided by the database system.
+
+Durability: Durability guarantees that once a transaction commits, the changes made by the transaction persist even in the event of system failures, crashes, or power outages. The database system ensures that the committed changes are permanently stored on non-volatile storage (e.g., disk) and can be recovered even if the system crashes immediately after the commit. Durability is typically achieved through mechanisms like write-ahead logging and transaction journaling.
+
+
+Question 5: Describe the concept of indexing in a database. How does indexing improve query performance?
+
+Indexing in a database is a technique used to improve the speed of data retrieval operations, such as SELECT queries, by creating additional data structures that allow for efficient lookup of records based on specific columns or expressions. An index is essentially a data structure that maps the values of a column or expression to the physical location of corresponding rows in a table.
+
+Here's how indexing improves query performance:
+
+Faster Data Retrieval: When a query filters or sorts data based on a column that is indexed, the database engine can use the index to quickly locate the relevant rows instead of scanning the entire table sequentially. This significantly reduces the amount of data that needs to be read from disk, resulting in faster query execution times.
+
+Reduced Disk I/O: Indexes store a sorted copy of the indexed column's values, which allows the database to perform binary search operations to locate records. This reduces the number of disk I/O operations required to access data, as the database can quickly narrow down the search to a subset of rows using the index.
+
+Improved Join Performance: Indexes can also improve the performance of JOIN operations by providing faster access to rows in the joined tables. If the columns used for joining are indexed, the database engine can use the indexes to efficiently match records from the joined tables, resulting in faster join execution times.
+
+Optimized Aggregate Queries: Indexes can speed up aggregate queries (e.g., SUM, COUNT, AVG) by allowing the database to quickly locate the relevant rows and perform the necessary calculations. This is particularly beneficial when dealing with large datasets, as it reduces the processing time required to aggregate data.
+
+However, it's important to note that indexing also has some drawbacks:
+
+Increased Storage Overhead: Indexes consume additional storage space in the database, as they store redundant copies of indexed columns' values. This can increase the overall size of the database and may impact performance if indexes are overused.
+
+Slower Write Operations: While indexes improve read performance, they can slow down write operations (INSERT, UPDATE, DELETE) as the database engine needs to update the indexes whenever the indexed columns are modified. Therefore, indexes should be used judiciously to strike a balance between read and write performance.
+
+Question 6: Explain the concept of concurrency control, deadlocks in a multi-user database environment.
+
+Concepts of Concurrency Control:
+Serializability: Transactions should execute as if they were processed one at a time (serially), even though they may be executed concurrently. This ensures that the final state of the database is equivalent to some serial order of execution of the transactions.
+
+Isolation Levels: Database systems provide different levels of isolation to control the visibility of changes made by concurrent transactions. Common isolation levels include Read Uncommitted, Read Committed, Repeatable Read, and Serializable. Each level offers a trade-off between concurrency and consistency.
+
+Locking: Locking is a mechanism used to control access to shared resources (e.g., database records) to prevent conflicts between transactions. Transactions acquire locks on data items before reading or modifying them, and locks are released after the transaction completes.
+
+Deadlocks:
+A deadlock occurs when two or more transactions are waiting indefinitely for each other to release locks on resources, resulting in a circular dependency that prevents any of the transactions from proceeding. Deadlocks can lead to system stagnation and must be detected and resolved to allow transactions to continue.
+
+Detection and Resolution of Deadlocks:
+Deadlock Detection: Database systems employ deadlock detection algorithms to periodically check for the existence of deadlocks. Common techniques include resource allocation graphs and wait-for graphs.
+
+Deadlock Resolution: Once a deadlock is detected, it needs to be resolved to allow transactions to progress. Techniques for deadlock resolution include:
+
+Deadlock Prevention: Implementing policies to prevent deadlocks from occurring in the first place, such as ensuring a strict ordering of lock acquisition to avoid circular waits.
+Deadlock Avoidance: Dynamically analyze transaction requests and lock acquisitions to ensure that they will not result in deadlocks.
+Deadlock Detection and Recovery: Rollback one or more transactions involved in the deadlock to break the circular dependency and allow the remaining transactions to proceed.
+
+
+
+Question 7: Read about Database sharding and explain couple of real time examples where, why, how it this concept is used.
+
+Database sharding is a technique used to horizontally partition data across multiple database instances or servers (shards) to improve scalability, performance, and availability. In sharding, each shard contains a subset of the data, and collectively, the shards store the entire dataset. This approach allows databases to handle larger volumes of data and higher numbers of transactions by distributing the workload across multiple servers.
+
+Examples of Database Sharding:
+Social Media Platforms:
+
+Example: Facebook, Twitter, Instagram.
+Why Sharding?: Social media platforms generate massive amounts of data, including user profiles, posts, comments, and media files. Sharding allows these platforms to distribute the data across multiple servers to handle the high volume of user activity and ensure fast response times.
+How Sharding is Used?: User data can be partitioned based on criteria such as user ID, geographical location, or activity patterns. Each shard may contain the data for a specific subset of users or regions. For example, a shard may store user data for users in a specific country or region.
+E-commerce Platforms:
+
+Example: Amazon, eBay, Alibaba.
+Why Sharding?: E-commerce platforms handle large catalogs of products, customer orders, and user interactions. Sharding helps these platforms distribute the data across multiple servers to handle the high volume of transactions and ensure fast and reliable access to product information and order processing.
+How Sharding is Used?: Product data, customer profiles, and order information can be partitioned across shards based on criteria such as product categories, customer IDs, or order timestamps. Each shard may handle a specific range of products or customer accounts.
+Online Gaming Platforms:
+
+Example: World of Warcraft, Fortnite, League of Legends.
+Why Sharding?: Online gaming platforms support large numbers of concurrent players and generate real-time data related to player interactions, game progress, and virtual economies. Sharding helps distribute the data across multiple servers to ensure low-latency gameplay and reliable game sessions.
+How Sharding is Used?: Game data can be partitioned across shards based on criteria such as game instances, player regions, or player levels. Each shard may represent a specific game server or game instance, and players are distributed across multiple shards based on matchmaking algorithms and player preferences.
+In each of these examples, database sharding enables organizations to scale their databases horizontally to handle increasing data volumes, transaction loads, and user interactions. By distributing data across multiple shards, these platforms can achieve high scalability, performance, and availability while maintaining data consistency and integrity.

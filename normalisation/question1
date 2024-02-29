@@ -1,0 +1,36 @@
+Question 1: Normalization
+Consider the following unnormalized table for a bookstore database:
+
+BookID	    Title	                Author	    Genre	    Publisher	    ISBN	        Price
+101	        To Kill a Mockingbird	Harper Lee	Fiction	    HarperCollins	978-0061120084	10.99
+102	        The Great Gatsby	    F.Scott.Fitzgerald	Fiction	Scribner	978-0743273565	12.50
+103	        Principles of Physics	Jearl Walker	Science	Wiley	978-0321976444	50.00
+
+-------------1NF-------------
+--->already in 1nf , each column have single values
+
+-------------2NF-------------
+--->all attributes within the entity should depend solely on the unique identifier of the entity.
+
+Book Information Table:
+
+BookID	Title	                    Author	            Genre
+101	    To Kill a Mockingbird	   Harper Lee	        Fiction
+102	    The Great Gatsby	        F. Scott Fitzgerald	Fiction
+103	    Principles of Physics	   Jearl Walker	        Science
+
+Publisher Information Table:
+
+publisherId     Publisher
+01              HarperCollins
+02              Scribner
+03              Wiley
+
+Price Information Table:
+BPid    Book ID	    PublisherId	        ISBN	        Price
+201        101	        01	            978-0061120084	10.99
+202	       102          02	            978-0743273565	12.50
+203	       103          03          	978-0321976444	50.00
+
+-------------3NF-------------
+--->no column entry should be dependent on any other entry (value) other than the key for the table.
