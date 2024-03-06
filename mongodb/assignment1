@@ -1,0 +1,61 @@
+use MovieDB
+// Sample data for movies collection
+db.movies.insertMany([
+//   {
+//     title: "Inception",
+//     releaseYear: 2010,
+//     genre: "Sci-Fi",
+//     director: "Christopher Nolan",
+//     actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"]
+//   },
+  // Add more movie documents
+  // Sample movie document with references to director and actors
+{
+    title: "Inception",
+    releaseYear: 2010,
+    genre: "Sci-Fi",
+    director: ObjectId("director_id"), // Reference to director document
+    actors: [ObjectId("actor1_id"), ObjectId("actor2_id"), ObjectId("actor3_id")] // References to actor documents
+  }
+  
+]);
+
+// Sample data for directors collection
+db.directors.insertMany([
+  {
+    name: "Christopher Nolan",
+    nationality: "British",
+    moviesDirected: ["Inception", "The Dark Knight", "Interstellar"]
+  },
+  // Add more director documents
+]);
+
+// Sample data for actors collection
+db.actors.insertMany([
+  {
+    name: "Leonardo DiCaprio",
+    nationality: "American",
+    moviesActedIn: ["Inception", "The Revenant", "Titanic"]
+  },
+  // Add more actor documents
+]);
+
+// Query (a): Find all movies released in a specific year
+db.movies.find({ releaseYear: 2010 });
+
+// Query (b): Find all movies in a specific genre
+db.movies.find({ genre: "Sci-Fi" });
+
+// Query (c): Find all movies directed by a specific director
+db.movies.find({ director: "Christopher Nolan" });
+
+// Query (d): Find all movies that a specific actor acted in
+db.movies.find({ actors: "Leonardo DiCaprio" });
+
+// Query (e): Find all directors from a specific nationality
+db.directors.find({ nationality: "British" });
+
+// Query (f): Find all actors from a specific nationality
+db.actors.find({ nationality: "American" });
+
+
